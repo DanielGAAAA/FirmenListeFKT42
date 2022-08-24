@@ -4,22 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Models\Firma;
-use App\Http\Resources\Firma as FirmaResource;
+use App\Models\Mitarbeiter;
+use App\Http\Resources\Mitarbeiter as MitarbeiterResource;
 
-class FirmenController extends Controller
+class MitarbeiterController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($firmen_id)
     {
-        $firmen = Firma::paginate(15);
-        return FirmaResource::collection($firmen)->collection;
-       
-    }
+        $mitarbeiter= Mitarbeiter::paginate(15);
+        $mitarbeiter_collection= MitarbeiterResource::collection($mitarbeiter);
+        $mitarbeiter_collection_firmen= collect([]);
+        foreach($mitarbeiter_collection as $item){
+            if($item["firmen_id"]==$firmen_id){
+                $mitarbeiter_collection_firmen->push($item);
+            }
+        }
+        return $mitarbeiter_collection_firmen;
+        }
+      //  return MitarbeiterResource::collection($mitarbeiter)->collection;
+    
 
     /**
      * Show the form for creating a new resource.
@@ -50,9 +58,8 @@ class FirmenController extends Controller
      */
     public function show($id)
     {
-        // Get eine Firma
-        $firma= Firma::findOrFail($id);
-        return response()->json(new FirmaResource($firma));
+        $mitarbeiter= Mitarbeiter::findOrFail($id);
+        return response()->json(new MitarbeiterResource($mitarbeiter));
     }
 
     /**

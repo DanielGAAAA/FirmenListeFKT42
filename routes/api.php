@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\FirmenController;
+use App\Http\Controllers\MitarbeiterController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,13 +14,11 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get("/firmen",[FirmenController::class, "index"]);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get("firmen","FirmenController@index");
-
-Route::get("firmen/{id}","FirmenController@show");
-
-Route::post("firmen","FirmenController@store");
+Route::get("/firmen/{id}",[FirmenController::class, "show"]);
+Route::get("/mitarbeiter/{firmen_id}",[MitarbeiterController::class, "index"]);
