@@ -17,7 +17,7 @@ class FirmenController extends Controller
     public function index()
     {
         $firmen = Firma::paginate(15);
-        return FirmaResource::collection($firmen)->collection;
+        return FirmaResource::collection($firmen);
        
     }
 

@@ -16,7 +16,7 @@ class MitarbeiterController extends Controller
      */
     public function index($firmen_id)
     {
-        $mitarbeiter= Mitarbeiter::paginate(15);
+        $mitarbeiter= Mitarbeiter::paginate(100);
         $mitarbeiter_collection= MitarbeiterResource::collection($mitarbeiter);
         $mitarbeiter_collection_firmen= collect([]);
         foreach($mitarbeiter_collection as $item){
@@ -36,7 +36,7 @@ class MitarbeiterController extends Controller
      */
     public function create()
     {
-        //
+    //
     }
 
     /**
@@ -47,7 +47,19 @@ class MitarbeiterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $mitarbeiter= new Mitarbeiter;
+
+        $mitarbeiter->firmen_id=$request->input("firmen_id");
+        $mitarbeiter->vorname=$request->input("vorname");
+        $mitarbeiter->nachname=$request->input("nachname");
+        $mitarbeiter->email=$request->input("email");
+       
+
+        if($mitarbeiter->save()){
+            return new MitarbeiterResource($mitarbeiter);
+
+        }
+
     }
 
     /**
@@ -56,10 +68,11 @@ class MitarbeiterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        $mitarbeiter= Mitarbeiter::findOrFail($id);
-        return response()->json(new MitarbeiterResource($mitarbeiter));
+        $mitarbeiter= Mitarbeiter::paginate(100);
+        $mitarbeiter_collection= MitarbeiterResource::collection($mitarbeiter);
+        return $mitarbeiter_collection;
     }
 
     /**
