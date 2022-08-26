@@ -45,7 +45,7 @@ class FirmenController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
