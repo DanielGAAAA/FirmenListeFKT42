@@ -1,16 +1,27 @@
+<style >
+form { 
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+ 
+}
+</style>
+
+
 <template>
 <div>
 <h1>Firmen</h1>
 <p> 
 
  
- <form id="id1" @submit.prevent="addMitarbeiter" >
+ <form id="id1" class="form" @submit.prevent="addMitarbeiter" >
         <p><label>Wähle Firma:</label></p>
-<select v-model="mitarbeiter.firmen_id" id="cars" name="cars" size="6" >
+<select v-model="mitarbeiter.firmen_id" id="cars" name="cars" size="6" required>
   <option  v-for="(firma , index) in firmen" v-bind:key="firma.firmenId">{{firma.firmenName}}</option>
 </select>
-        <p><label>Vorname<input v-model="mitarbeiter.vorname"  type="text" placeholder="vorname" name="vorname"></label></p>
-        <p><label>Nachname<input v-model="mitarbeiter.nachname"  type="text" placeholder="nachname" name="nachname"></label></p>
+        <p><label>Vorname <input v-model="mitarbeiter.vorname"  type="text" placeholder="vorname" name="vorname" required></label></p>
+        <p><label>Nachname <input v-model="mitarbeiter.nachname"  type="text" placeholder="nachname" name="nachname" required></label></p>
        <p> <label>Email     <input v-model="mitarbeiter.email" type="email" placeholder="email" required></label></p>
 <button type="submit">Neuer mitarebeiter</button>
 </form></p>
@@ -21,7 +32,7 @@
     <p style="font-size: large; font-weight: bold;">Mitarbeiter:</p>
     <div v-for="mitarbeiter in mitarbeiters" v-bind:key="mitarbeiter.id">
     <div v-if="mitarbeiter.firmen_Id==firma.firmenId">
-    <p>{{"Vorname: "+mitarbeiter.vorname + " Nachname: " + mitarbeiter.nachname +" Email: " + mitarbeiter.email  }}</p>
+    <p>{{"Vorname: "+mitarbeiter.vorname + "  Nachname: " + mitarbeiter.nachname +" Email: " + mitarbeiter.email  }}</p>
     </div>
     </div>
   
@@ -79,7 +90,6 @@ export default{
 
     
             if(this.mitarbeiter.firmen_id==this.firmen[i].firmenName){
-                console.log("tst")
                 this.mitarbeiter.firmen_id=this.firmen[i].firmenId;
             }
         }
@@ -102,7 +112,5 @@ export default{
     }
    }}
 
-
-
-
 </script>
+
