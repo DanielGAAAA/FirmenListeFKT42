@@ -10,10 +10,12 @@ form {
 
 
 <template>
+    
+    <route-view/>
 <div>
+    <router-link to="/firma">skrr</router-link>
 <h1>Firmen</h1>
 <p> 
-
  
  <form id="id1" class="form" @submit.prevent="addMitarbeiter" >
         <p><label>Wähle Firma:</label></p>

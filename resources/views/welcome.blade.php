@@ -13,10 +13,10 @@
     </head>
     <body>
          <div id="app">
-            <firmen></firmen>
+           
          </div>
          
-         
          @vite("resources/js/app.js") 
+       
     </body>
 </html>
